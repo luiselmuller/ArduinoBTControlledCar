@@ -50,12 +50,12 @@ void loop()
     {
       //if the input byte is d or u the speed is changed (spd variable)
       case 'd':
-        if(spd >= 175)
-          spd -= 15;
+        if(spd >= 165)
+          spd -= 5;
       break;
       case 'u':
-        if(spd <= 240)
-          spd += 15;
+        if(spd <= 250)
+          spd += 5;
       break;
       //if the user inputs 3 the backwards pins are turned off and the forward pins are turned on with a
       //small delay in between
