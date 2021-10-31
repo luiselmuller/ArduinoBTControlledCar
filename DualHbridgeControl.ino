@@ -25,7 +25,7 @@ int backwardRight = 6;  //moves the motors on the right backwards
 int backwardLeft = 10; //moves the motors on the left backwards
 
 //min 160pwm - max 255 pwm
-int spd = 160;
+const int spd = 160;
 
 void setup() 
 {
@@ -44,18 +44,18 @@ void loop()
   {
     Serial.println("**BLUETOOTH CONNECTED**");
     char rByte = Serial.read();  //reads the data from the bluetooth module
-    
+    int tempSpd = spd;
     //Button controls
     switch(rByte)
     {
       //if the input byte is d or u the speed is changed (spd variable)
       case 'd':
         if(spd >= 165)
-          spd -= 5;
+          tempSpd -= 5;
       break;
       case 'u':
         if(spd <= 250)
-          spd += 5;
+          tempSpd += 5;
       break;
       //if the user inputs 3 the backwards pins are turned off and the forward pins are turned on with a
       //small delay in between
