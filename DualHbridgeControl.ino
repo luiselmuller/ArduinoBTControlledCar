@@ -5,13 +5,15 @@
  * circuits.
  * 
  * How To Use:
- * Byte = 3 -> Forward
+ * Byte = 3   -> Forward
  * Byte = 1/7 -> Turn right 
  * Byte = 2/6 -> Turn left 
- * Byte = 8 -> Reverse
+ * Byte = 8   -> Reverse
  * Byte = 5/6 -> Turn left 
  * Byte = 4/7 -> Turn right 
- * Byte = 9 -> Stop
+ * Byte = 9   -> Stop
+ * Byte = d   -> Speed is lowered to a minimum of 160pwm
+ * Byte = u   -> Speed is increased to a maximum of 255pwm
  * 
  * === Connect BTModule RX pin to TX pin on arduino ===
  * ===   and BTModule TX pin to RX pin on arduino   ===
@@ -23,7 +25,7 @@ int backwardRight = 6;  //moves the motors on the right backwards
 int backwardLeft = 10; //moves the motors on the left backwards
 
 //min 160pwm - max 255 pwm
-int spd = 255;
+int spd = 160;
 
 void setup() 
 {
@@ -46,53 +48,62 @@ void loop()
     //Button controls
     switch(rByte)
     {
-      //if the user inputs 1 the backwards pins are turned off and the forward pins are turned on with a
+      //if the input byte is d or u the speed is changed (spd variable)
+      case 'd':
+        if(spd >= 175)
+          spd -= 15;
+      break;
+      case 'u':
+        if(spd <= 240)
+          spd += 15;
+      break;
+      //if the user inputs 3 the backwards pins are turned off and the forward pins are turned on with a
       //small delay in between
       case '3':
         Serial.println("Moving Forward");
         //forward
         analogWrite(backwardRight, 0);
         analogWrite(backwardLeft, 0);
-        delay(500);
+        delay(200);
         analogWrite(forwardRight, spd);
         analogWrite(forwardLeft, spd);
       break;
-      //if the user inputs 2 the forward pins are turned off and the backwards pins are turned on with a 
+      //if the user inputs 8 the forward pins are turned off and the backwards pins are turned on with a 
       //small delay in between
       case '8':
         Serial.println("Moving Backward");
         //backward
         analogWrite(forwardRight, 0);
         analogWrite(forwardLeft, 0);
-        delay(500);
+        delay(200);
         analogWrite(backwardRight, spd);
         analogWrite(backwardLeft, spd);
       break;
-      //if the user inputs 3 the right side forward pin is turned to spdpwm
+      //if the user inputs 2 the right side forward pin is turned to spdpwm
       case '2':
         Serial.println("Left");
         //turns left
         analogWrite(backwardRight, 0);
         analogWrite(forwardLeft, 0);
         analogWrite(backwardLeft, 0);
-        delay(500);
+        delay(200);
         analogWrite(forwardRight, spd);
       break;
-      //if the user inputs 4 the right side forward pin is turned to spdpwm
+      //if the user inputs 1 the right side forward pin is turned to spdpwm
       case '1':
         Serial.println("Right");
         //turns right
         analogWrite(forwardRight, 0);
         analogWrite(backwardLeft, 0);
         analogWrite(backwardRight, 0);
-        delay(500);
+        delay(200);
         analogWrite(forwardLeft, spd);
       break;
       //turns left by turning the left motors in reverse and right motors forward
       case '6':
         analogWrite(forwardLeft, 0);
         analogWrite(forwardRight, 0);
-        delay(500);
+        delay(200);
         analogWrite(backwardLeft, spd);
         analogWrite(forwardRight, spd);
       break;
@@ -100,7 +111,7 @@ void loop()
       case '7':
         analogWrite(forwardLeft, 0);
         analogWrite(forwardRight, 0);
-        delay(500);
+        delay(200);
         analogWrite(forwardLeft, spd);
         analogWrite(backwardRight, spd);
       break;
@@ -110,7 +121,7 @@ void loop()
         analogWrite(forwardRight, 0);
         analogWrite(forwardLeft, 0);
         analogWrite(backwardRight, 0);
-        delay(500);
+        delay(200);
         analogWrite(backwardLeft, spd);
       break;
       //turns right using reverse on one side
@@ -119,7 +130,7 @@ void loop()
         analogWrite(forwardRight, 0);
         analogWrite(forwardLeft, 0);
         analogWrite(backwardLeft, 0);
-        delay(500);
+        delay(200);
         analogWrite(backwardRight, spd);
       break;
       //if the user inputs 0 the car will stop
@@ -129,7 +140,7 @@ void loop()
         analogWrite(backwardLeft, 0);
         analogWrite(forwardLeft, 0);
         analogWrite(backwardRight, 0);
-        delay(500);
+        delay(200);
    }
   }
 }
