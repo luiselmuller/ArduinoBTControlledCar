@@ -42,7 +42,7 @@ void setup()
   pinMode(backwardRight, OUTPUT);
   pinMode(backwardLeft, OUTPUT);
   
-  Serial.begin(115200);
+  Serial.begin(38400);
 }
 
 /*
