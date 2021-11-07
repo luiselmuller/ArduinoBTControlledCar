@@ -42,7 +42,7 @@ void setup()
   pinMode(backwardRight, OUTPUT);
   pinMode(backwardLeft, OUTPUT);
   
-  Serial.begin(38400);
+  Serial.begin(9600);
 }
 
 /*
@@ -70,9 +70,8 @@ void loop()
 {
   if(Serial.available()) //if there is data to read
   {
-    char rByte = Serial.read();  //reads the data from the bluetooth module
     //Button controls
-    switch(rByte)
+    switch(Serial.read())
     {
       //if the input byte is d or u the speed is changed (spd variable)
       case 'd':
