@@ -46,7 +46,7 @@ void setup()
   pinMode(backwardLeft, OUTPUT);
   
   Serial.begin(9600);
-  Blue.begin(38400);
+  Blue.begin(9600);
 }
 
 /*
