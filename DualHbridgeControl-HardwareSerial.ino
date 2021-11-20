@@ -2,7 +2,7 @@
  * Luisel A. Muller Rodriguez
  * 9/25/2021
  * Program to control 4 motors using 2 h-bridge
- * circuits and sending commands from an app through bluetooth.
+ * circuits by sending commands from an app through bluetooth.
  *
  * How To Use:
  * Byte = 3   -> Forward
@@ -23,6 +23,7 @@
  *
  * === Connect BTModule RX pin to TX pin on arduino ===
  * ===   and BTModule TX pin to RX pin on arduino   ===
+ * Bluetooth module used: HC-05
  *
  * The app used to control the arduino is available at:
  * https://gallery.appinventor.mit.edu/?galleryid=ad552982-a765-438e-b923-764d1356e364
