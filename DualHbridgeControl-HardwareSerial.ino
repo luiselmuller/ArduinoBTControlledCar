@@ -141,7 +141,7 @@ void loop()
       break;
       
       /****************************************************************************************************
-      * If the data received is '2' the pins that move the left motors forward & backwardds and 
+      * If the data received is '2' the pins that move the left motors forward & backwards and 
       * the right motors backwards are turned off, the remaining pin is on. This makes the car turn to 
       * the left.
       ****************************************************************************************************/
