@@ -17,7 +17,7 @@
  * 
  * Some bytes like 1 and 7 have the same action, they both move the car right but do 
  * it in different ways. When the data received is '1' then it will turn right only
- * uising the motors on one side. When the data received is '7' then it will turn 
+ * using the motors on one side. When the data received is '7' then it will turn 
  * right using one side to move forward and the other side to move backwards.
  * More details about this are in the rest of the comments.
  *
